@@ -25,8 +25,8 @@
                                 <input type="number" class="form-control" id="quantity" name="qty" required>
                             </div>
                             @auth
-                                
-                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+
+                                <button type="submit" class="btn btn-primary">Add to Cart</button>
                             @endauth
                             @guest
                                 <a href="{{ route('login.handle') }}" class="btn btn-primary">Add to Cart</a>
@@ -83,16 +83,25 @@
                                             <td>{{ $cart->qty }}</td>
                                             <td>Rp{{ number_format($cart->product->price * $cart->qty, 2, ',', '.') }}</td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm mb-2" data-toggle="modal"
-                                                    data-target="#editCartModal-{{ $cart->id }}">Edit</button>
+                                                @auth
 
-                                                <form action="{{ route('cart.destroy', $cart->id) }}" method="post"
-                                                    style="display: inline-block;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                                    <button class="btn btn-primary btn-sm mb-2" data-toggle="modal"
+                                                        data-target="#editCartModal-{{ $cart->id }}">Edit</button>
 
-                                                </form>
+                                                    <form action="{{ route('cart.destroy', $cart->id) }}" method="post"
+                                                        style="display: inline-block;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-danger btn-sm">Delete</button>
+
+                                                    </form>
+                                                @endauth
+                                                @guest
+                                                    <a href="{{ route('login.handle') }}"
+                                                        class="btn btn-primary btn-sm mb-2">Edit</a>
+                                                    <a href="{{ route('login.handle') }}"
+                                                        class="btn btn-danger btn-sm">Delete</a>
+                                                @endguest
                                             </td>
 
                                         </tr>
@@ -121,9 +130,16 @@
                                         <tr class="table table-borderless">
                                             <td></td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm col-12" type="submit"
-                                                    onclick="return confirm('Are you sure you want to checkout?')">Checkout
-                                                    / Paid</button>
+                                                @auth
+                                                    <button class="btn btn-primary btn-sm col-12" type="submit"
+                                                        onclick="return confirm('Are you sure you want to checkout?')">Checkout
+                                                        / Paid</button>
+
+                                                @endauth
+                                                @guest
+                                                    <a href="{{ route('login.handle') }}"
+                                                        class="btn btn-primary btn-sm col-12">Checkout / Paid</a>
+                                                @endguest
                                             </td>
                                         </tr>
                                         <input type="hidden" name="total" value="{{ $total }}">
