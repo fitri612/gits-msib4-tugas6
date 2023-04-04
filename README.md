@@ -26,3 +26,10 @@ Start the local development server
     php artisan serve
 
 You can now access the server at http://localhost:8000
+
+
+## :gear: Technology Used:
+ - Laravel 9
+ - Jquery
+ - Bootstrap 5
+ - FontAwesome
