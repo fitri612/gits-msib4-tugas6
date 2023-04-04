@@ -1,3 +1,5 @@
+## NAME : LAILATUL FITRIYAH
+## ASAL : UNIVERSITAS DIAN NUSWANTORO
 
 Clone the repository
 
