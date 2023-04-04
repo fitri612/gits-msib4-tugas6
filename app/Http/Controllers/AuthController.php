@@ -64,6 +64,6 @@ class AuthController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login.index');
+        return redirect()->route('login.handle');
     }
 }
